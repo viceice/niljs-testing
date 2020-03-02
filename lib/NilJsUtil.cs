@@ -16,7 +16,7 @@ namespace lib
         {
             try
             {
-                return JsScript.Parse(code, CompilerLogger);
+                return JsScript.Parse(code, (MessageLevel level, CodeCoordinates coords, string message) => CompilerLogger(level, coords, message, file));
             }
             catch (JSException ex)
             {
@@ -27,24 +27,24 @@ namespace lib
 
         private static void CoreProvider_OnFlush(object sender, EventArgs e) => _scriptCache.Clear();
 
-        internal static void CompilerLogger(MessageLevel level, CodeCoordinates coords, string message)
+        internal static void CompilerLogger(MessageLevel level, CodeCoordinates coords, string message, string file)
         {
             switch (level)
             {
                 case MessageLevel.Regular:
-                    Console.WriteLine($"DEBUG: {message} at {coords}");
+                    Console.WriteLine($"DEBUG: {message} at {file}{coords}");
                     break;
                 case MessageLevel.Recomendation:
-                    Console.WriteLine($"REC: {message} at {coords}");
+                    Console.WriteLine($"REC: {message} at {file}{coords}");
                     break;
                 case MessageLevel.Warning:
-                    Console.WriteLine($"WARN: {message} at {coords}");
+                    Console.WriteLine($"WARN: {message} at {file}{coords}");
                     break;
                 case MessageLevel.CriticalWarning:
-                    Console.WriteLine($"CRIT: {message} at {coords}");
+                    Console.WriteLine($"CRIT: {message} at {file}{coords}");
                     break;
                 case MessageLevel.Error:
-                    Console.WriteLine($"ERROR: {message} at {coords}");
+                    Console.WriteLine($"ERROR: {message} at {file}{coords}");
                     break;
             }
         }
