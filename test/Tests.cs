@@ -47,6 +47,9 @@ namespace lib.test
             //var item = new Test { { "Test", 5 } };
             //se.Context.DefineVariable("res").Assign("test");
 
+            var calls = 0;
+            se.Context.DefineVariable("loaded").Assign(new Action(() => calls++));
+
             se.Eval("main.js");
 
             //se.Context.DefineVariable("assert").Assign(new Action<bool, string>((v, s) => Assert.True(v, s)));
@@ -56,6 +59,7 @@ namespace lib.test
             //var res = se.Run();
 
             //Assert.NotNull(res);
+            Assert.AreEqual(1, calls);
         }
     }
 }

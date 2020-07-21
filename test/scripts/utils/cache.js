@@ -15,3 +15,5 @@ export function has(key) {
 export function clear() {
     cache.clear();
 }
+
+loaded();

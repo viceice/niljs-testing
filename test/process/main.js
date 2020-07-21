@@ -1,5 +1,5 @@
 import * as math from 'math';
-//import { random, cache } from 'utils';
+import { random, cache } from 'utils';
 
 //res = 'todo';
 //log('before');
@@ -62,7 +62,8 @@ import * as math from 'math';
 //assert(typeof Promise === 'undefined', 'Promise should be undefined');
 //assert(typeof Dict.Get === 'undefined', 'Dict.Get should be undefined');
 
-//assert(cache.has('PI') === false, 'PI should not cached');
-//math.test();
+assert(cache.has('PI') === false, 'PI should not cached');
+math.test();
 
-assert(typeof math.PI === 'number', 'Pi should be a number');
+assert(typeof math.Pi === 'number', 'Pi should be a number');
+assert(cache.get('PI') === math.Pi, 'PI should be cached');
