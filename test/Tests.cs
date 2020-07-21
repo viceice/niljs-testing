@@ -40,26 +40,25 @@ namespace lib.test
         }
 
         [Test]
-        public void Test1()
+        public void Test_PR_221()
         {
+            // https://github.com/nilproject/NiL.JS/pull/221
             var se = new NilJsProcessEngine();
-
-            //var item = new Test { { "Test", 5 } };
-            //se.Context.DefineVariable("res").Assign("test");
 
             var calls = 0;
             se.Context.DefineVariable("loaded").Assign(new Action(() => calls++));
 
             se.Eval("main.js");
 
-            //se.Context.DefineVariable("assert").Assign(new Action<bool, string>((v, s) => Assert.True(v, s)));
-            //se.Context.DefineVariable("res").Assign("test");
-            //se.Context.DefineVariable("item").Assign(JSValue.Marshal(item));
-
-            //var res = se.Run();
-
-            //Assert.NotNull(res);
             Assert.AreEqual(1, calls);
+        }
+
+        [Test]
+        public void Test_Issue_220()
+        {
+            // https://github.com/nilproject/NiL.JS/issues/220
+            var se = new NilJsProcessEngine();
+            se.Eval("main2.js");
         }
     }
 }

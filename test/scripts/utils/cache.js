@@ -16,4 +16,5 @@ export function clear() {
     cache.clear();
 }
 
-loaded();
+if (typeof loaded !== 'undefined')
+    loaded();
