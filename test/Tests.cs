@@ -26,7 +26,7 @@ namespace lib.test
                 Console.WriteLine($"Create:\n{Newtonsoft.Json.Linq.JToken.FromObject(attr)}");
             }
 
-            public void Update([MyValueConverter]IDictionary<string, object> attr)
+            public void Update([MyValueConverter] IDictionary<string, object> attr)
             {
                 try
                 {
@@ -44,18 +44,18 @@ namespace lib.test
         {
             var se = new NilJsProcessEngine();
 
-            var item = new Test { { "Test", 5 } };
-            se.Context.DefineVariable("res").Assign("test");
+            //var item = new Test { { "Test", 5 } };
+            //se.Context.DefineVariable("res").Assign("test");
 
             se.Eval("main.js");
 
-            se.Context.DefineVariable("assert").Assign(new Action<bool, string>((v, s) => Assert.True(v, s)));
-            se.Context.DefineVariable("res").Assign("test");
-            se.Context.DefineVariable("item").Assign(JSValue.Marshal(item));
+            //se.Context.DefineVariable("assert").Assign(new Action<bool, string>((v, s) => Assert.True(v, s)));
+            //se.Context.DefineVariable("res").Assign("test");
+            //se.Context.DefineVariable("item").Assign(JSValue.Marshal(item));
 
-            var res = se.Run();
+            //var res = se.Run();
 
-            Assert.NotNull(res);
+            //Assert.NotNull(res);
         }
     }
 }
