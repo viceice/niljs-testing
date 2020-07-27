@@ -3,6 +3,7 @@ using NiL.JS.Core.Interop;
 using NiL.JS.Extensions;
 using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 namespace lib.test
@@ -39,6 +40,18 @@ namespace lib.test
             }
         }
 
+
+        class IndexerDummy
+        {
+
+            public object this[string key] { get => key; }
+            public object this[Guid key] { get => key; }
+
+            public string Title => "title";
+
+            public bool Update() => true;
+        }
+
         [Test]
         public void Test_PR_221()
         {
@@ -59,6 +72,32 @@ namespace lib.test
             // https://github.com/nilproject/NiL.JS/issues/220
             var se = new NilJsProcessEngine();
             se.Eval("main2.js");
+        }
+
+        [Test]
+        public void Test_Issue_224_console()
+        {
+            // https://github.com/nilproject/NiL.JS/issues/224
+            var se = new Context();
+            se.DefineVariable("it").Assign(JSValue.Marshal(new IndexerDummy()));
+            se.Eval("console.log('start')");
+            Assert.IsTrue(se.Eval("it.Update()").As<bool>());
+            Assert.AreEqual("title", se.Eval("it.Title").ToString());
+            se.Eval("console.log('item:', it)");
+            se.Eval("console.log('end')");
+        }
+
+        [Test]
+        public void Test_Issue_224_json()
+        {
+            // https://github.com/nilproject/NiL.JS/issues/224
+            var se = new Context();
+            se.DefineVariable("it").Assign(JSValue.Marshal(new IndexerDummy()));
+            se.Eval("console.log('start')");
+            Assert.IsTrue(se.Eval("it.Update()").As<bool>());
+            Assert.AreEqual("title", se.Eval("it.Title").ToString());
+            Assert.IsNotNull(se.Eval("JSON.stringify(it)").Value);
+            se.Eval("console.log('end')");
         }
     }
 }
