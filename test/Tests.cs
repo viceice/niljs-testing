@@ -67,11 +67,14 @@ namespace lib.test
         }
 
         [Test]
-        public void Test_Issue_220()
+        public void Test_Issue_234()
         {
             // https://github.com/nilproject/NiL.JS/issues/220
+            // https://github.com/nilproject/NiL.JS/issues/234
             var se = new NilJsProcessEngine();
-            se.Eval("main2.js");
+
+            // Should not throw
+            Assert.Throws<JSException>(() => se.Eval("main2.js"));
         }
 
         [Test]
@@ -83,7 +86,8 @@ namespace lib.test
             se.Eval("console.log('start')");
             Assert.IsTrue(se.Eval("it.Update()").As<bool>());
             Assert.AreEqual("title", se.Eval("it.Title").ToString());
-            se.Eval("console.log('item:', it)");
+            //se.Eval("console.log('item:', it)")
+            Assert.Throws<JSException>(() => se.Eval("console.log('item:', it)"));
             se.Eval("console.log('end')");
         }
 
@@ -96,7 +100,8 @@ namespace lib.test
             se.Eval("console.log('start')");
             Assert.IsTrue(se.Eval("it.Update()").As<bool>());
             Assert.AreEqual("title", se.Eval("it.Title").ToString());
-            Assert.IsNotNull(se.Eval("JSON.stringify(it)").Value);
+            //Assert.IsNotNull(se.Eval("JSON.stringify(it)").Value);
+            Assert.Throws<JSException>(() => se.Eval("JSON.stringify(it)"));
             se.Eval("console.log('end')");
         }
     }

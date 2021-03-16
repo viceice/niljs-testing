@@ -10,5 +10,5 @@ export function test() {
 export function run() {
     const pi = Pi;
 
-    return { pi };
+    return { pi: pi };
 }
