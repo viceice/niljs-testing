@@ -1,5 +1,8 @@
 {
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
-    "config:base"
+    "github>visualon/renovate-config:shared",
+    ":dependencyDashboard",
+    ":assignee(viceice)"
   ]
 }
