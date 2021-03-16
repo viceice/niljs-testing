@@ -9,13 +9,17 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        dotnet: [ '2.1.x', '3.1.x', '5.0.x' ]
+
     steps:
     - uses: actions/checkout@v2
     
-    - name: Setup .NET
+    - name: Setup .NET ${{ matrix.dotnet }}
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 3.1.x
+        dotnet-version: ${{ matrix.dotnet }}
         
     - name: Restore dependencies
       run: dotnet restore
@@ -24,4 +28,4 @@ jobs:
       run: dotnet build --no-restore
       
     - name: Test
-      run: dotnet test -f netcoreapp3.1 --no-build --verbosity normal
+      run: dotnet test --no-build --verbosity normal
