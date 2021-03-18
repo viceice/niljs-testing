@@ -74,7 +74,7 @@ namespace lib.test
             var se = new NilJsProcessEngine();
 
             // Should not throw
-            Assert.Throws<JSException>(() => se.Eval("main2.js"));
+            se.Eval("main2.js");
         }
 
         [Test]
