@@ -7,7 +7,7 @@
 
     <ItemGroup>
         <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
-        <PackageReference Include="NiL.JS" Version="2.5.1673"  Condition="Exists('../../NiL.JS/NiL.JS/NiL.JS.csproj') == false or '$(UseNilSource)' != 'true'" />
+        <PackageReference Include="NiL.JS" Version="2.5.1674"  Condition="Exists('../../NiL.JS/NiL.JS/NiL.JS.csproj') == false or '$(UseNilSource)' != 'true'" />
         <ProjectReference Include="../../NiL.JS/NiL.JS/NiL.JS.csproj" Condition="Exists('../../NiL.JS/NiL.JS/NiL.JS.csproj') and '$(UseNilSource)' == 'true'" />
     </ItemGroup>
 
